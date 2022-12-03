@@ -1,12 +1,9 @@
 <template>
   <div class="common-layout">
     <el-container class="full_height">
-      <el-aside width="200px">Aside</el-aside>
-      <el-container>
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
-        <el-footer>Footer</el-footer>
-      </el-container>
+      <el-header class="header">Header</el-header>
+      <el-main class="content">Main</el-main>
+      <el-footer class="footer">Footer</el-footer>
     </el-container>
   </div>
 </template>
@@ -27,6 +24,8 @@ export default {
 <style>
 html,body{
  height:100vh;
+ margin: 0;
+ padding: 0;
 }
 
 #app {
@@ -39,6 +38,18 @@ html,body{
 
 .full_height{
   height:100vh;
+}
+
+.header{
+  background-color: red;
+}
+
+.content{
+  background-color: purple;
+}
+
+.footer {
+  background-color: blue;
 }
 
 </style>
