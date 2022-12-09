@@ -22,10 +22,10 @@ export default {
   data: () => ({
     test: "hello",
     todos: [
-    {id: 1, desc: "Vue lernen", done: true},
-    {id: 2, desc: "Jasmine lernen", done: false},
-    {id: 3, desc: "Element+ lernen", done: false},
-    {id: 4, desc: "Arbeit schreiben", done: false},
+    {id: "1", desc: "Vue lernen", done: true},
+    {id: "2", desc: "Jasmine lernen", done: false},
+    {id: "3", desc: "Element+ lernen", done: false},
+    {id: "4", desc: "Arbeit schreiben", done: false},
     ]
   }),
 }

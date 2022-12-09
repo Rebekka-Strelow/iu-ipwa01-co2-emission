@@ -1,6 +1,6 @@
 <template>
     <div v-for="todo in items" v-bind:key="todo.id" :class="{'finished':todo.done}">
-        <TodoListItem :item="todo" />
+        <TodoListItem :item="todo" @toggle="toggleListItem" />
     </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   ],
   components: {
     TodoListItem
+  },
+  methods: {
+    toggleListItem(el){
+      el.done = !el.done;
+    }
   }
 }
 </script>
