@@ -3,7 +3,10 @@
     <el-container class="full_height">
       <el-header class="header">Header</el-header>
       <el-main class="content">
-        <TodoList :items="todos" />
+        <EmissionTable 
+          :json_data=emissions 
+          :filter_unternehmen=filter_unternehmen 
+          :filter_land=filter_land />
       </el-main>
       <el-footer class="footer">Footer</el-footer>
     </el-container>
@@ -12,20 +15,36 @@
 
 
 <script>
-import TodoList from "./components/ToDoList"
+import EmissionTable from "./components/EmissionTable";
+
 
 export default {
   name: 'App',
   components: {
-    TodoList
+    EmissionTable
   },
   data: () => ({
-    test: "hello",
-    todos: [
-    {id: "1", desc: "Vue lernen", done: true},
-    {id: "2", desc: "Jasmine lernen", done: false},
-    {id: "3", desc: "Element+ lernen", done: false},
-    {id: "4", desc: "Arbeit schreiben", done: false},
+    //Test-Dummys, Backend kommt später
+    emissions: [
+      {id: "1", unternehmen: "MusterA", land: "China", wert: 45.002},
+      {id: "2", unternehmen: "MusterB", land: "China", wert: 1134.002},
+      {id: "3", unternehmen: "MusterC", land: "Amerika", wert: 415.002},
+      {id: "4", unternehmen: "MusterD", land: "Amerika", wert: 314.002},
+      {id: "5", unternehmen: "MusterB", land: "Deutschland", wert: 31.002},
+      {id: "6", unternehmen: "MusterC", land: "Deutschland", wert: 143.002},
+      {id: "7", unternehmen: "MusterD", land: "Hawaii", wert: 12.002}
+    ],
+    filter_unternehmen: [
+      {text: "MusterA", value: "MusterA"},
+      {text: "MusterB", value: "MusterB"},
+      {text: "MusterC", value: "MusterC"},
+      {text: "MusterD", value: "MusterD"},
+    ],
+    filter_land: [
+    {text: "China", value: "China"},
+    {text: "Amerika", value: "Amerika"},
+    {text: "Deutschland", value: "Deutschland"},
+    {text: "Hawaii", value: "Hawaii"},
     ]
   }),
 }
@@ -47,7 +66,7 @@ html,body{
 }
 
 .full_height{
-  height:100vh;
+  min-height:100vh;
 }
 
 .header{

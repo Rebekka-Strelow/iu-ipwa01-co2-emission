@@ -1,7 +1,9 @@
 <template>
+  <div>
     <div v-for="todo in items" v-bind:key="todo.id" :class="{'finished':todo.done}">
         <TodoListItem :item="todo" @toggle="toggleListItem" />
     </div>
+  </div>
 </template>
 
 <script>
