@@ -1,7 +1,8 @@
 <template>
-  <div class="common-layout">
     <el-container class="full_height">
-      <el-header class="header">Header</el-header>
+      <el-header class="header">
+        <HeaderImage />
+      </el-header>
       <el-main class="content">
         <EmissionTable 
           :json_data=emissions 
@@ -10,18 +11,18 @@
       </el-main>
       <el-footer class="footer">Footer</el-footer>
     </el-container>
-  </div>
 </template>
 
 
 <script>
 import EmissionTable from "./components/EmissionTable";
+import HeaderImage from "./components/HeaderImage";
 
 
 export default {
   name: 'App',
   components: {
-    EmissionTable
+    EmissionTable, HeaderImage
   },
   data: () => ({
     //Test-Dummys, Backend kommt später
@@ -51,34 +52,46 @@ export default {
 </script>
 
 <style>
-html,body{
+html,body {
  height:100vh;
  margin: 0;
  padding: 0;
+ background-color: #87d5ca;
+ display: flex;
+ justify-content: center;
 }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
-}
 
 .full_height{
-  min-height:100vh;
+  width: 80vw;
+  border: 1px solid #398378;
+  background-color: #398378;
+  border-radius: 2%;
+  height: 96vh;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 .header{
-  background-color: rgb(255, 180, 180);
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: auto;
 }
 
 .content{
-  background-color: rgb(255, 170, 255);
+  background-color: white;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .footer {
-  background-color: rgb(186, 186, 255);
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: auto;
 }
 
 .finished {

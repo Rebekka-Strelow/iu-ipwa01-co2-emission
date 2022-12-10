@@ -1,0 +1,46 @@
+{
+    "daten": [
+        {
+            "id": "1",
+            "unternehmen": "MusterA",
+            "land": "China",
+            "wert": 45.002
+        },
+        {
+            "id": "2",
+            "unternehmen": "MusterB",
+            "land": "China",
+            "wert": 1134.002
+        },
+        {
+            "id": "3",
+            "unternehmen": "MusterC",
+            "land": "Amerika",
+            "wert": 415.002
+        },
+        {
+            "id": "4",
+            "unternehmen": "MusterD",
+            "land": "Amerika",
+            "wert": 314.002
+        },
+        {
+            "id": "5",
+            "unternehmen": "MusterB",
+            "land": "Deutschland",
+            "wert": 31.002
+        },
+        {
+            "id": "6",
+            "unternehmen": "MusterC",
+            "land": "Deutschland",
+            "wert": 143.002
+        },
+        {
+            "id": "7",
+            "unternehmen": "MusterD",
+            "land": "Hawaii",
+            "wert": 12.002
+        }
+    ]
+}
