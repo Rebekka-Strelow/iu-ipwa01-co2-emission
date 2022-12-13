@@ -1,5 +1,5 @@
 <template>
-    <el-table :data="json_data" height="50vh">
+    <el-table :data="json_data">
       <el-table-column property="id" width="50" />
       <el-table-column property="unternehmen" label="Unternehmen" :filters="filter_unternehmen" :filter-method="filterHandler_Unternehmen" sortable/>
       <el-table-column property="land" label="Land" :filters="filter_land" :filter-method="filterHandler_Land" sortable/>
@@ -24,9 +24,5 @@ export default {
 </script>
 
 <style>
-
-  el-table {
-    width: 100%;
-  }
 
 </style>

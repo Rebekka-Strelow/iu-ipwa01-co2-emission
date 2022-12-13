@@ -2,12 +2,25 @@
     <el-container class="full_height">
       <el-header class="header">
         <HeaderImage />
+        <HeaderBar 
+          @goto="goto" 
+          @reload="reload"/>
+
+
       </el-header>
-      <el-main class="content">
-        <EmissionTable 
+      <el-main class="content height_100">
+        <el-container class="height_100">
+          <EmissionTable v-if="this.currentPage=='main'"
+          class="padding_r"
           :json_data=emissions 
           :filter_unternehmen=filter_unternehmen 
           :filter_land=filter_land />
+
+          <InfoContent v-if="this.currentPage=='info'" />
+
+        </el-container>
+
+       
       </el-main>
       <el-footer class="footer">Footer</el-footer>
     </el-container>
@@ -17,14 +30,20 @@
 <script>
 import EmissionTable from "./components/EmissionTable";
 import HeaderImage from "./components/HeaderImage";
+import HeaderBar from './components/HeaderBar';
+import InfoContent from "./components/InfoContent";
 
 
 export default {
   name: 'App',
   components: {
-    EmissionTable, HeaderImage
-  },
+    EmissionTable,
+    HeaderImage,
+    HeaderBar,
+    InfoContent
+},
   data: () => ({
+    currentPage: "main",
     //Test-Dummys, Backend kommt später
     emissions: [
       {id: "1", unternehmen: "MusterA", land: "China", wert: 45.002},
@@ -42,17 +61,25 @@ export default {
       {text: "MusterD", value: "MusterD"},
     ],
     filter_land: [
-    {text: "China", value: "China"},
-    {text: "Amerika", value: "Amerika"},
-    {text: "Deutschland", value: "Deutschland"},
-    {text: "Hawaii", value: "Hawaii"},
+      {text: "China", value: "China"},
+      {text: "Amerika", value: "Amerika"},
+      {text: "Deutschland", value: "Deutschland"},
+      {text: "Hawaii", value: "Hawaii"},
     ]
   }),
+  methods:{
+    goto(target){
+      this.currentPage=target;
+    },
+    reload(obj){
+      console.log(obj);
+    }
+  }
 }
 </script>
 
 <style>
-html,body {
+html, body {
  height:100vh;
  margin: 0;
  padding: 0;
@@ -61,29 +88,49 @@ html,body {
  justify-content: center;
 }
 
+:root {
+  --el-color-primary: #398378; 
+}
+
 
 .full_height{
   width: 80vw;
   border: 1px solid #398378;
   background-color: #398378;
-  border-radius: 2%;
+  border-radius: 1%;
   height: 96vh;
   margin-top: 1%;
   margin-bottom: 1%;
 }
 
-.header{
+.padding_l{
   padding-left: 5%;
+  padding-right: 2%;
+
+}
+
+.padding_r {
   padding-right: 5%;
-  padding-top: 2%;
-  padding-bottom: 2%;
+  padding-left: 2%;
+}
+
+.padding_lr {
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+.header{
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 0%;
+  padding-bottom: 0%;
   height: auto;
 }
 
 .content{
   background-color: white;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-right: 0%;
+  padding-left: 0%;
 }
 
 .footer {
@@ -96,6 +143,10 @@ html,body {
 
 .finished {
   text-decoration: line-through;
+}
+
+.height_100{
+  height: 100%
 }
 
 </style>
