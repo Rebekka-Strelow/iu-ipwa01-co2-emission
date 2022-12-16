@@ -2,15 +2,28 @@
         <el-menu 
           class="headerBar" 
           mode="horizontal"
-          @select="handleSelect">
-            <el-menu-item index="1">Hauptseite</el-menu-item>
-            <el-menu-item index="2">Informationen</el-menu-item>
-            <!-- <div class="flex-grow"></div> -->
-            <el-sub-menu index="3">
+          @select="handleSelect"
+          :ellipsis="false">
+          <!-- LTR-Anordnung -->
+          <el-menu-item v-if="this.alignment=='ltr'" index="1">Hauptseite</el-menu-item>
+            <el-menu-item v-if="this.alignment=='ltr'" index="2">Informationen</el-menu-item>
+            <div v-if="this.alignment=='ltr'" class="flex-grow" />
+            <el-sub-menu v-if="this.alignment=='ltr'" index="3">
               <template #title >Aktionen</template>
               <el-menu-item index="3-1">Daten neu einlesen</el-menu-item>
               <el-menu-item index="3-2">Filter neu berechnen</el-menu-item>
             </el-sub-menu>
+
+            <!-- RTL-Anordnung -->
+            <el-sub-menu v-if="this.alignment=='rtl'" index="3">
+              <template #title >Aktionen</template>
+              <el-menu-item index="3-1">Daten neu einlesen</el-menu-item>
+              <el-menu-item index="3-2">Filter neu berechnen</el-menu-item>
+            </el-sub-menu>
+            <div v-if="this.alignment=='rtl'" class="flex-grow" />
+            <el-menu-item v-if="this.alignment=='rtl'" index="2">Informationen</el-menu-item>
+            <el-menu-item v-if="this.alignment=='rtl'" index="1">Hauptseite</el-menu-item>
+
         </el-menu>  
 </template>
 
@@ -30,14 +43,18 @@ export default {
         this.$emit('reload', 'filters');
       }
     }
-  }
-  // props: [
-  //   'mode'
-  // ]
+  },
+  props: [
+    'alignment'
+  ]
 }
 
 </script>
 
 <style>
+
+.flex-grow{
+  flex-grow: 1;
+}
 
 </style>

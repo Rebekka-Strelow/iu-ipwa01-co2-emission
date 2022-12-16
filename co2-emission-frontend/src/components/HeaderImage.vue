@@ -1,5 +1,7 @@
 <template>
-    <img class="image" src=".././assets/logo-white.png" alt="Logo der Website" style="height: 10vh">
+  <div class="container">
+    <img class="image" src=".././assets/logo-white.png" alt="Logo der Website">
+  </div>
 </template>
 
 <script>
@@ -11,10 +13,13 @@ export default {
 
 <style scoped>
 .image {
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  width: 50vw;
+  max-height: 15vh;
+  object-fit: contain;
+  object-position: left;
 }
-
 </style>

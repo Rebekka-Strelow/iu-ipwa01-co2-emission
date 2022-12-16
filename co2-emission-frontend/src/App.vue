@@ -4,23 +4,19 @@
         <HeaderImage />
         <HeaderBar 
           @goto="goto" 
-          @reload="reload"/>
-
-
+          @reload="reload"
+          :alignment=alignment
+          />
       </el-header>
       <el-main class="content height_100">
-        <el-container class="height_100">
           <EmissionTable v-if="this.currentPage=='main'"
           class="padding_r"
           :json_data=emissions 
           :filter_unternehmen=filter_unternehmen 
           :filter_land=filter_land />
 
-          <InfoContent v-if="this.currentPage=='info'" />
-
-        </el-container>
-
-       
+          <InfoContent v-if="this.currentPage=='info'" 
+          class="padding_r"/>      
       </el-main>
       <el-footer class="footer">Footer</el-footer>
     </el-container>
@@ -65,8 +61,20 @@ export default {
       {text: "Amerika", value: "Amerika"},
       {text: "Deutschland", value: "Deutschland"},
       {text: "Hawaii", value: "Hawaii"},
-    ]
+    ],
+    //Sprachen, die das Right-to-Left-Schreibsystem verwenden
+    rtl_languages: ["ar", "arc", "dv", "fa", "ha", "he", "khw", "ks", "ku", "ps", "ur", "yi"]
   }),
+  computed: {
+    alignment(){
+      let language = navigator.language;
+      console.log(language);
+      if(this.rtl_languages.includes(language)){
+        return "rtl";
+      }
+      return "ltr";
+    }
+  },
   methods:{
     goto(target){
       this.currentPage=target;
