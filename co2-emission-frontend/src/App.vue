@@ -1,7 +1,7 @@
 <template>
     <el-container class="full_height">
       <el-header class="header">
-        <HeaderImage />
+        <HeaderImage :alignment=alignment />
         <HeaderBar 
           @goto="goto" 
           @reload="reload"
@@ -147,10 +147,6 @@ html, body {
   padding-top: 2%;
   padding-bottom: 2%;
   height: auto;
-}
-
-.finished {
-  text-decoration: line-through;
 }
 
 .height_100{

@@ -3,19 +3,20 @@
           class="headerBar" 
           mode="horizontal"
           @select="handleSelect"
-          :ellipsis="false">
-          <!-- LTR-Anordnung -->
-          <el-menu-item v-if="this.alignment=='ltr'" index="1">Hauptseite</el-menu-item>
+          :ellipsis="false"
+          ref="menu">
+            <!-- LTR-Anordnung -->
+            <el-menu-item v-if="this.alignment=='ltr'" index="1">Hauptseite</el-menu-item>
             <el-menu-item v-if="this.alignment=='ltr'" index="2">Informationen</el-menu-item>
             <div v-if="this.alignment=='ltr'" class="flex-grow" />
-            <el-sub-menu v-if="this.alignment=='ltr'" index="3">
+            <el-sub-menu v-if="this.alignment=='ltr'" index="3"  @touchstart="handleOpen">
               <template #title >Aktionen</template>
               <el-menu-item index="3-1">Daten neu einlesen</el-menu-item>
               <el-menu-item index="3-2">Filter neu berechnen</el-menu-item>
             </el-sub-menu>
 
             <!-- RTL-Anordnung -->
-            <el-sub-menu v-if="this.alignment=='rtl'" index="3">
+            <el-sub-menu v-if="this.alignment=='rtl'" index="3" @touchstart="handleOpen">
               <template #title >Aktionen</template>
               <el-menu-item index="3-1">Daten neu einlesen</el-menu-item>
               <el-menu-item index="3-2">Filter neu berechnen</el-menu-item>
@@ -42,6 +43,9 @@ export default {
       } else if (key == "3-2") {
         this.$emit('reload', 'filters');
       }
+    },
+    handleOpen(){
+      this.$refs.menu.open(3)
     }
   },
   props: [

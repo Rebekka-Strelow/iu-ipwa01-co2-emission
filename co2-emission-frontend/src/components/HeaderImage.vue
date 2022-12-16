@@ -1,12 +1,19 @@
 <template>
   <div class="container">
-    <img class="image" src=".././assets/logo-white.png" alt="Logo der Website">
+    <!-- LTR Alignment-->
+    <img v-if="this.alignment == 'ltr'" class="image ltr" src=".././assets/logo-white.png" alt="Logo der Website">
+
+    <!--RTL Alignment -->
+    <img v-if="this.alignment == 'rtl'" class="image rtl" src=".././assets/logo-white-rtl.png" alt="Logo der Website">
   </div>
 </template>
 
 <script>
 export default {
-  name: "HeaderImage"
+  name: "HeaderImage",
+  props: [
+    'alignment'
+  ]
 }
 
 </script>
@@ -17,9 +24,21 @@ export default {
   margin-right: 2vw;
   margin-top: 1vh;
   margin-bottom: 1vh;
-  width: 50vw;
+  width: calc(100% - 4vw);
   max-height: 15vh;
   object-fit: contain;
+}
+
+.ltr {
   object-position: left;
+}
+
+.rtl{
+  object-position: right;
+}
+
+
+.flex-grow{
+  flex-grow: 1;
 }
 </style>
