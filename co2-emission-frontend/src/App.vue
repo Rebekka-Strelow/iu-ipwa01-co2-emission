@@ -16,9 +16,15 @@
           :filter_land=filter_land />
 
           <InfoContent v-if="this.currentPage=='info'" 
-          class="padding_r"/>      
+          class="padding_r"/>    
+          
+          <ImpressumContent v-if="this.currentPage=='impressum'" class="padding_r"/>
+
+          <DatenschutzContent v-if="this.currentPage=='datenschutz'" class="padding_r"/>
       </el-main>
-      <el-footer class="footer">Footer</el-footer>
+      <el-footer class="footer">
+        <Footer  @goto="goto"/>
+      </el-footer>
     </el-container>
 </template>
 
@@ -28,6 +34,9 @@ import EmissionTable from "./components/EmissionTable";
 import HeaderImage from "./components/HeaderImage";
 import HeaderBar from './components/HeaderBar';
 import InfoContent from "./components/InfoContent";
+import Footer from "./components/Footer";
+import ImpressumContent from './components/ImpressumContent';
+import DatenschutzContent from './components/DatenschutzContent';
 
 
 export default {
@@ -36,7 +45,10 @@ export default {
     EmissionTable,
     HeaderImage,
     HeaderBar,
-    InfoContent
+    InfoContent,
+    Footer,
+    ImpressumContent,
+    DatenschutzContent
 },
   data: () => ({
     currentPage: "main",
@@ -96,10 +108,23 @@ html, body {
  justify-content: center;
 }
 
+html, body, button {
+  font-family: lekton;
+}
+
 :root {
   --el-color-primary: #398378; 
 }
 
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+@font-face {
+    font-family: lekton;
+    src: url('~@/assets/fonts/lekton_regular.ttf');
+}
 
 .full_height{
   width: 80vw;
@@ -150,7 +175,8 @@ html, body {
 }
 
 .height_100{
-  height: 100%
+  height: 100%;
+  padding: 0;
 }
 
 </style>

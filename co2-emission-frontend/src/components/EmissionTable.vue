@@ -1,9 +1,12 @@
 <template>
+  <div>
+    <h1>CO²-Ausstoß pro Unternehmen und Land</h1>
     <el-table :data="json_data">
       <el-table-column property="unternehmen" label="Unternehmen" :filters="filter_unternehmen" :filter-method="filterHandler_Unternehmen" sortable/>
       <el-table-column property="land" label="Land" :filters="filter_land" :filter-method="filterHandler_Land" sortable/>
       <el-table-column property="wert" label="CO²-Ausstoß" sortable/>
     </el-table>
+  </div>
 </template>
 
 <script> 
