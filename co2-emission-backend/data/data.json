@@ -1,199 +1,166 @@
 {
   "data": [
     {
-      "id": "1",
       "unternehmen": "Shein",
       "land": "China",
       "wert": 245.123
     },
     {
-      "id": "26",
       "unternehmen": "Shein",
       "land": "Südkorea",
       "wert": 45.002
     },
     {
-      "id": "27",
       "unternehmen": "Shein",
       "land": "USA",
       "wert": 58.002
     },
     {
-      "id": "2",
       "unternehmen": "Nike",
       "land": "USA",
       "wert": 78.965
     },
     {
-      "id": "3",
       "unternehmen": "Puma",
       "land": "Deutschland",
       "wert": 34.678
     },
     {
-      "id": "28",
       "unternehmen": "Puma",
       "land": "England",
       "wert": 12.412
     },
     {
-      "id": "29",
       "unternehmen": "Puma",
       "land": "USA",
       "wert": 64.123
     },
     {
-      "id": "4",
       "unternehmen": "Reebok",
       "land": "England",
       "wert": 23.456
     },
     {
-      "id": "5",
       "unternehmen": "Under Armour",
       "land": "Kanada",
       "wert": 56.789
     },
     {
-      "id": "30",
       "unternehmen": "Under Armour",
       "land": "USA",
       "wert": 19.789
     },
     {
-      "id": "6",
       "unternehmen": "Converse",
       "land": "USA",
       "wert": 45.123
     },
     {
-      "id": "7",
       "unternehmen": "Converse",
       "land": "Kanada",
       "wert": 67.890
     },
     {
-      "id": "8",
       "unternehmen": "Asics",
       "land": "China",
       "wert": 34.567
     },
     {
-      "id": "31",
       "unternehmen": "Asics",
       "land": "Deutschland",
       "wert": 34.567
     },
     {
-      "id": "9",
       "unternehmen": "Vans",
       "land": "USA",
       "wert": 23.456
     },
     {
-      "id": "33",
       "unternehmen": "Vans",
       "land": "Deutschland",
       "wert": 12.421
     },
     {
-      "id": "34",
       "unternehmen": "Vans",
       "land": "England",
       "wert": 21.674
     },
     {
-      "id": "10",
       "unternehmen": "Skechers",
       "land": "USA",
       "wert": 56.789
     },
     {
-      "id": "11",
       "unternehmen": "K-Swiss",
       "land": "Schweiz",
       "wert": 45.123
     },
     {
-      "id": "12",
       "unternehmen": "DC Shoes",
       "land": "USA",
       "wert": 67.890
     },
     {
-      "id": "13",
       "unternehmen": "Fila",
       "land": "Südkorea",
       "wert": 34.567
     },
     {
-      "id": "25",
       "unternehmen": "Fila",
       "land": "China",
       "wert": 62.032
     },
     {
-      "id": "14",
       "unternehmen": "Onitsuka Tiger",
       "land": "China",
       "wert": 23.456
     },
     {
-      "id": "15",
       "unternehmen": "Teva",
       "land": "USA",
       "wert": 56.789
     },
     {
-      "id": "16",
       "unternehmen": "Ecco",
       "land": "Dänemark",
       "wert": 45.123
     },
     {
-      "id": "17",
       "unternehmen": "Merrell",
       "land": "USA",
       "wert": 67.890
     },
     {
-      "id": "18",
       "unternehmen": "Birkenstock",
       "land": "Deutschland",
       "wert": 34.567
     },
     {
-      "id": "19",
       "unternehmen": "Clarks",
       "land": "England",
       "wert": 23.456
     },
     {
-      "id": "20",
       "unternehmen": "Dr. Martens",
       "land": "England",
       "wert": 56.789
     },
     {
-      "id": "21",
       "unternehmen": "Timberland",
       "land": "USA",
       "wert": 45.123
     },
     {
-      "id": "22",
       "unternehmen": "Red Wing Shoes",
       "land": "USA",
       "wert": 67.890
     },
     {
-      "id": "23",
       "unternehmen": "Red Wing Shoes",
       "land": "China",
       "wert": 124.890
     },
     {
-      "id": "24",
       "unternehmen": "Dr. Martens",
       "land": "USA",
       "wert": 124.789

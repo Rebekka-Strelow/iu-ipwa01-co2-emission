@@ -1,46 +1,29 @@
-const readJSON = () => {
+const getJSONData = () => {
     let filePath = "../data/data.json";
     var data = require(filePath).data;
     return data;
 }
 
 const getCountryFilters = () => {
-    var data = readJSON();
+    var data = getJSONData();
     var resultSet = new Set();
     data.forEach(element => {
         resultSet.add(element.land)
     });
-    return resultSet;
+    return Array.from(resultSet);
 }
 
 const getCompanyFilters = () => {
-    var data = readJSON();
+    var data = getJSONData();
     var resultSet = new Set();
     data.forEach(element => {
         resultSet.add(element.unternehmen)
     });
-    return resultSet;
+    return Array.from(resultSet);
 }
 
 module.exports = {
-    readJSON,
+    getJSONData,
     getCountryFilters,
     getCompanyFilters
 }
-
-/*module.exports = {
-    readJSON: function() {
-        let filePath = "../data/data.json";
-        var data = require(filePath).data;
-        return data;
-    },
-
-    getCountryFilters: function(){
-        var data = readJSON();
-        var resultSet = new Set();
-        data.forEach(element => {
-            resultSet.add(element.land)
-        });
-        return resultSet;
-    }
- }*/
