@@ -1,7 +1,7 @@
 const getJSONData = () => {
     let filePath = "../data/data.json";
     var data = require(filePath).data;
-    return data;
+    return Array.from(data);
 }
 
 const getCountryFilters = () => {
