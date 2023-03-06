@@ -42,6 +42,20 @@ app.get('/companies', (reg, res) => {
     return res.send(controller.getCompanyFilters());
 
 })
+
+//Resette die Daten
+app.get('/resetData', (reg, res) => { 
+    controller.resetData();
+    return res.sendStatus(200);
+})
+
+//Resette de Filter
+app.get('/resetFilters', (reg, res) => { 
+    controller.resetFilters();
+    return res.sendStatus(200);
+})
+
+
 // ############### REST SCHNITTSTELLLEN ENDE ##############
 
 //Ausloggen von Serverstart erfolgreich

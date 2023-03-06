@@ -1,29 +1,60 @@
+//Cache
+let cashedData = [];
+let cachedCountryFilters = [];
+let cashedCompanyFilters = [];
+
+
+//Methoden
 const getJSONData = () => {
-    let filePath = "../data/data.json";
-    var data = require(filePath).data;
-    return Array.from(data);
+    if(cashedData.length == 0){
+        let filePath = "../data/data.json";
+        var data = require(filePath).data;
+        cashedData = Array.from(data);
+    }
+    return cashedData;
 }
 
 const getCountryFilters = () => {
-    var data = getJSONData();
-    var resultSet = new Set();
-    data.forEach(element => {
-        resultSet.add(element.land)
-    });
-    return Array.from(resultSet);
+    if(cachedCountryFilters.length == 0){
+        var data = getJSONData();
+        var resultSet = new Set();
+        data.forEach(element => {
+            resultSet.add(element.land)
+        });
+        cachedCountryFilters = Array.from(resultSet);
+    }
+    return cachedCountryFilters;
 }
 
 const getCompanyFilters = () => {
-    var data = getJSONData();
-    var resultSet = new Set();
-    data.forEach(element => {
-        resultSet.add(element.unternehmen)
-    });
-    return Array.from(resultSet);
+    if(cashedCompanyFilters.length == 0){
+        var data = getJSONData();
+        var resultSet = new Set();
+        data.forEach(element => {
+            resultSet.add(element.unternehmen)
+        });
+        cashedCompanyFilters = Array.from(resultSet);
+    }
+   return cashedCompanyFilters;
+}
+
+const resetFilters = () => {
+    cachedCountryFilters = [];
+    cashedCompanyFilters = [];
+    getCountryFilters();
+    getCompanyFilters();
+}
+
+const resetData = () => {
+    cashedData = [];
+    getJSONData();
+    resetFilters();
 }
 
 module.exports = {
     getJSONData,
     getCountryFilters,
-    getCompanyFilters
+    getCompanyFilters,
+    resetData,
+    resetFilters
 }

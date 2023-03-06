@@ -79,7 +79,15 @@ export default {
       this.currentPage = target;
     },
     reload(obj) {
-      console.log(obj);
+      if(obj == "data"){
+        this.resetData();
+      } 
+      if (obj == "filters"){
+        this.resetFilters();
+      }
+      this.fetchBackendData();
+      this.fetchCountryFilterData();
+      this.fetchCompanyFilterData();
     },
 
     //Hole die Daten für die Tabelle
@@ -92,7 +100,7 @@ export default {
             "Origin": "http://localhost:8080",
           }
         }).then(response => response.json())
-          .then(data => this.parseAndLoadTable(data));
+        .then(data => this.parseAndLoadTable(data));
     },
     parseAndLoadTable(data) {
       let index = 1;
@@ -104,7 +112,7 @@ export default {
       this.backend_data = processedData;
     },
     //Hole die Daten für die Filter
-    fetchCountryFilterData(){
+    fetchCountryFilterData() {
       fetch("http://localhost:8081/countries",
         {
           "method": "GET",
@@ -113,9 +121,9 @@ export default {
             "Origin": "http://localhost:8080",
           }
         }).then(response => response.json())
-          .then(data => this.parseAndLoadCountry(data));
+        .then(data => this.parseAndLoadCountry(data));
     },
-    parseAndLoadCountry(data){
+    parseAndLoadCountry(data) {
       this.filter_land = [];
       data.forEach(element => {
         let obj = {};
@@ -124,7 +132,7 @@ export default {
         this.filter_land.push(obj);
       })
     },
-    fetchCompanyFilterData(){
+    fetchCompanyFilterData() {
       fetch("http://localhost:8081/companies",
         {
           "method": "GET",
@@ -133,9 +141,9 @@ export default {
             "Origin": "http://localhost:8080",
           }
         }).then(response => response.json())
-          .then(data => this.parseAndLoadCompany(data));
+        .then(data => this.parseAndLoadCompany(data));
     },
-    parseAndLoadCompany(data){
+    parseAndLoadCompany(data) {
       this.filter_unternehmen = [];
       data.forEach(element => {
         let obj = {};
@@ -143,6 +151,36 @@ export default {
         obj.value = element;
         this.filter_unternehmen.push(obj);
       })
+    },
+    resetData() {
+      fetch("http://localhost:8081/resetData",
+        {
+          "method": "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Origin": "http://localhost:8080",
+          }
+        }).then((response) => {
+          if (!response.ok) {
+            console.error("Es ist ein Fehler aufgetreten")
+          }
+          console.log("Daten erfolgreich neu geladen")
+        })
+    },
+    resetFilters() {
+      fetch("http://localhost:8081/resetFilters",
+        {
+          "method": "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Origin": "http://localhost:8080",
+          }
+        }).then((response) => {
+          if (!response.ok) {
+            console.error("Es ist ein Fehler aufgetreten")
+          }
+          console.log("Filter erfolgreich neu geladen")
+        })
     }
   },
   mounted: function () {
