@@ -8,6 +8,7 @@ let cashedCompanyFilters = [];
 const getJSONData = () => {
     if(cashedData.length == 0){
         let filePath = "../data/data.json";
+        delete require.cache[require.resolve(filePath)]   // Deleting loaded module
         var data = require(filePath).data;
         cashedData = Array.from(data);
     }

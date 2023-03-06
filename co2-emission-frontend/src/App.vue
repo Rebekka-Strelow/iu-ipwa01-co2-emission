@@ -29,7 +29,7 @@ import InfoContent from "./components/InfoContent";
 import PageFooter from "./components/PageFooter";
 import ImpressumContent from './components/ImpressumContent';
 import DatenschutzContent from './components/DatenschutzContent';
-
+import { ElMessage } from 'element-plus';
 
 export default {
   name: 'App',
@@ -45,24 +45,12 @@ export default {
   data: () => ({
     currentPage: "main",
     //Test-Dummys, Backend kommt später
-    backend_data: [
-      { id: "0", unternehmen: "Loading ...", land: "Loading ...", wert: 0 }
-    ],
-    filter_unternehmen: [
-      { text: "MusterA", value: "MusterA" },
-      { text: "MusterB", value: "MusterB" },
-      { text: "MusterC", value: "MusterC" },
-      { text: "MusterD", value: "MusterD" },
-    ],
-    filter_land: [
-      { text: "China", value: "China" },
-      { text: "Amerika", value: "Amerika" },
-      { text: "Deutschland", value: "Deutschland" },
-      { text: "Hawaii", value: "Hawaii" },
-    ],
+    backend_data: [],
+    filter_unternehmen: [],
+    filter_land: [],
+
     //Sprachen, die das Right-to-Left-Schreibsystem verwenden
     rtl_languages: ["ar", "arc", "dv", "fa", "ha", "he", "khw", "ks", "ku", "ps", "ur", "yi"],
-    responseAvailable: false
   }),
   computed: {
     alignment() {
@@ -71,18 +59,18 @@ export default {
         return "rtl";
       }
       return "ltr";
-    },
-
+    }
   },
   methods: {
     goto(target) {
       this.currentPage = target;
     },
+
+    //Stößt die Resets für Daten und Filter an und lädt dann die Daten neu ins Frontend
     reload(obj) {
       if(obj == "data"){
         this.resetData();
-      } 
-      if (obj == "filters"){
+      } else if (obj == "filters"){
         this.resetFilters();
       }
       this.fetchBackendData();
@@ -111,7 +99,8 @@ export default {
       });
       this.backend_data = processedData;
     },
-    //Hole die Daten für die Filter
+
+    //Hole die Daten für die Filter der Länder
     fetchCountryFilterData() {
       fetch("http://localhost:8081/countries",
         {
@@ -132,6 +121,8 @@ export default {
         this.filter_land.push(obj);
       })
     },
+
+    //Hole die Daten für die Filter der Unternehmen
     fetchCompanyFilterData() {
       fetch("http://localhost:8081/companies",
         {
@@ -152,6 +143,8 @@ export default {
         this.filter_unternehmen.push(obj);
       })
     },
+
+    //Reset-Methode für die Tabellendaten
     resetData() {
       fetch("http://localhost:8081/resetData",
         {
@@ -162,11 +155,21 @@ export default {
           }
         }).then((response) => {
           if (!response.ok) {
-            console.error("Es ist ein Fehler aufgetreten")
+            ElMessage({
+            showClose: true,
+            message: 'Beim Neuladen der Daten ist ein Fehler aufgetreten',
+            type: 'error',
+          })
           }
-          console.log("Daten erfolgreich neu geladen")
+          ElMessage({
+            showClose: true,
+            message: 'Neuladen der Daten erfolgreich',
+            type: 'success',
+          })
         })
     },
+
+    //Reset-Methode für die Filter
     resetFilters() {
       fetch("http://localhost:8081/resetFilters",
         {
@@ -177,13 +180,22 @@ export default {
           }
         }).then((response) => {
           if (!response.ok) {
-            console.error("Es ist ein Fehler aufgetreten")
+            ElMessage({
+            showClose: true,
+            message: 'Beim Neuladen der Filter ist ein Fehler aufgetreten',
+            type: 'error',
+          })
           }
-          console.log("Filter erfolgreich neu geladen")
+          ElMessage({
+            showClose: true,
+            message: 'Neuladen der Filter erfolgreich',
+            type: 'success',
+          })
         })
     }
   },
   mounted: function () {
+    //On Mount: Lade die Daten ins Frontend ein
     this.fetchBackendData();
     this.fetchCountryFilterData();
     this.fetchCompanyFilterData();
