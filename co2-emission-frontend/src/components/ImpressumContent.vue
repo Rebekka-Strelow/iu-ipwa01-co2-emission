@@ -1,5 +1,5 @@
 <template>
-    <p>Impressum</p>
+    <h1>Impressum</h1>
 </template>
 
 <script>

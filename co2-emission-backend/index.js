@@ -1,23 +1,23 @@
-
-
-const express = require('express'); //Import the express dependency
+//Imports
+const express = require('express');
 const cors = require('cors');
 var favicon = require('serve-favicon');
 var path = require('path');
-var controller = require('./src/controller') //Importiere den Controller, der die Daten aus der JSON-Datei filtert und ließt
+var controller = require('./src/controller')
 
-const app = express();              //Instantiate an express app, the main work horse of this server
-const port = 8081;                  //Save the port number where your server will be listening
+//Express-App initialisieren
+const app = express();             
+const port = 8081;               
 
-app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico'))); //favicon eingebunden
+//Icon einbinden
+app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico'))); 
+
+//CORS erlauben für Localhost
 var corsOptions = {
     origin: 'http://localhost:8080',
-    optionsSuccessStatus: 200 // For legacy browser support
+    optionsSuccessStatus: 200
 }
-
 app.use(cors(corsOptions));
-console.log(controller.getCountryFilters());
-console.log(controller.getCompanyFilters());
 
 
 //############## REST SCHNITTSTELLEN ################

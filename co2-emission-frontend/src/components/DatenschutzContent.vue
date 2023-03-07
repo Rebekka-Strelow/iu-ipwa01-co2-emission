@@ -1,5 +1,5 @@
 <template>
-    <p>Datenschutz</p>
+    <h1>Datenschutz</h1>
 </template>
 
 <script>

@@ -4,11 +4,11 @@ let cachedCountryFilters = [];
 let cashedCompanyFilters = [];
 
 
-//Methoden
+//Methoden, die für die API bereit gestellt werden
 const getJSONData = () => {
     if(cashedData.length == 0){
         let filePath = "../data/data.json";
-        delete require.cache[require.resolve(filePath)]   // Deleting loaded module
+        delete require.cache[require.resolve(filePath)];
         var data = require(filePath).data;
         cashedData = Array.from(data);
     }
@@ -20,7 +20,7 @@ const getCountryFilters = () => {
         var data = getJSONData();
         var resultSet = new Set();
         data.forEach(element => {
-            resultSet.add(element.land)
+            resultSet.add(element.land);
         });
         cachedCountryFilters = Array.from(resultSet);
     }
@@ -42,16 +42,13 @@ const getCompanyFilters = () => {
 const resetFilters = () => {
     cachedCountryFilters = [];
     cashedCompanyFilters = [];
-    getCountryFilters();
-    getCompanyFilters();
 }
 
 const resetData = () => {
     cashedData = [];
-    getJSONData();
-    resetFilters();
 }
 
+//Bereitstellen der Methdoen für die API
 module.exports = {
     getJSONData,
     getCountryFilters,

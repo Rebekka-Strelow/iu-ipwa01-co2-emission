@@ -43,8 +43,10 @@ export default {
     DatenschutzContent
   },
   data: () => ({
+    //aktuell angezeigte Seite
     currentPage: "main",
-    //Test-Dummys, Backend kommt später
+    
+    //Globale Valiablen, um die Daten aus dem Backend zu speichern
     backend_data: [],
     filter_unternehmen: [],
     filter_land: [],
@@ -53,6 +55,7 @@ export default {
     rtl_languages: ["ar", "arc", "dv", "fa", "ha", "he", "khw", "ks", "ku", "ps", "ur", "yi"],
   }),
   computed: {
+    //Wird die Seite von Links nach Rechts oder von Rechts nach Links dargestellt?
     alignment() {
       let language = navigator.language;
       if (this.rtl_languages.includes(language)) {
@@ -62,6 +65,7 @@ export default {
     }
   },
   methods: {
+    //Wechsele die angezeigte Seite
     goto(target) {
       this.currentPage = target;
     },
@@ -217,7 +221,7 @@ body {
 html,
 body,
 button {
-  font-family: lekton;
+  font-family: libre_franklin;
 }
 
 :root {
@@ -225,13 +229,18 @@ button {
 }
 
 h1 {
-  text-align: center;
-  margin-top: 0;
+  margin-top: 2%;
+  text-align: left;
 }
 
+.el-table {
+  margin-bottom: 2%;
+}
+
+
 @font-face {
-  font-family: lekton;
-  src: url('~@/assets/fonts/lekton_regular.ttf');
+  font-family: libre_franklin;
+  src: url('~@/assets/fonts/LibreFranklin-Thin.ttf');
 }
 
 .full_height {
