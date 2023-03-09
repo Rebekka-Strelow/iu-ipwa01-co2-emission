@@ -1,8 +1,9 @@
 <template>
-      <el-collapse-item :title="question" :name="id">
-        <p>{{answer}}</p>
-    </el-collapse-item>
-
+    <el-collapse>
+        <el-collapse-item :title="question" :name="id">
+            <p>{{ answer }}</p>
+        </el-collapse-item>
+    </el-collapse>
 
 </template>
 
@@ -16,6 +17,5 @@ export default {
 </script>
 
 <style scoped>
-
 
 </style>

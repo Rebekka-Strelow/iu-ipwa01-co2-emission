@@ -6,9 +6,9 @@
     </el-header>
     <el-main class="content height_100">
       <EmissionTable v-if="this.currentPage == 'main'" class="padding_r" :json_data=backend_data
-        :filter_unternehmen=filter_unternehmen :filter_land=filter_land />
+        :filter_unternehmen=filter_unternehmen :filter_land=filter_land @search="search" @reset="reset" />
 
-      <InfoContent v-if="this.currentPage == 'info'" class="padding_r" :faq_data=faq_data />
+      <InfoContent v-if="this.currentPage == 'info'" class="padding_r" :faq_data=faq_data @search="search" @reset="reset"/>
 
       <ImpressumContent v-if="this.currentPage == 'impressum'" class="padding_r" />
 
@@ -30,6 +30,8 @@ import PageFooter from "./components/PageFooter";
 import ImpressumContent from './components/ImpressumContent';
 import DatenschutzContent from './components/DatenschutzContent';
 import { ElMessage } from 'element-plus';
+import Fuse from 'fuse.js';
+
 
 export default {
   name: 'App',
@@ -45,7 +47,7 @@ export default {
   data: () => ({
     //aktuell angezeigte Seite
     currentPage: "main",
-    
+
     //Globale Valiablen, um die Daten aus dem Backend zu speichern
     backend_data: [],
     faq_data: [],
@@ -71,11 +73,53 @@ export default {
       this.currentPage = target;
     },
 
+    //Suche in dem angegebenen Datensatz
+    search(target, text) {
+      //Suche in der Datentabelle
+      if (target == "data") {
+        const options = {
+          minMatchCharLength: text.length,
+          keys: ["unternehmen", "land"]
+        }
+        const fuse = new Fuse(this.backend_data, options);
+        let result = fuse.search(text);
+        this.backend_data = [];
+        result.forEach(element => {
+          this.backend_data.push(element.item);
+        })
+      }
+
+      //Suche in den FAQs
+      if(target == "faq"){
+        const options = {
+          minMatchCharLength: text.length,
+          keys: ["question", "answer"]
+        }
+        const fuse = new Fuse(this.faq_data, options);
+        let result = fuse.search(text);
+        this.faq_data = [];
+        result.forEach(element => {
+          this.faq_data.push(element.item);
+        })
+      }
+
+    },
+
+    //Entferne den Such-Filter wieder
+    reset(target) {
+      if (target == "data") {
+        this.fetchBackendData();
+      }
+      if (target == "faq") {
+        this.fetchFAQData();
+      }
+    },
+
     //Stößt die Resets für Daten und Filter an und lädt dann die Daten neu ins Frontend
     reload(obj) {
-      if(obj == "data"){
+      if (obj == "data") {
         this.resetData();
-      } else if (obj == "filters"){
+      } else if (obj == "filters") {
         this.resetFilters();
       }
       this.fetchBackendData();
@@ -183,10 +227,10 @@ export default {
         }).then((response) => {
           if (!response.ok) {
             ElMessage({
-            showClose: true,
-            message: 'Beim Neuladen der Daten ist ein Fehler aufgetreten',
-            type: 'error',
-          })
+              showClose: true,
+              message: 'Beim Neuladen der Daten ist ein Fehler aufgetreten',
+              type: 'error',
+            })
           }
           ElMessage({
             showClose: true,
@@ -208,10 +252,10 @@ export default {
         }).then((response) => {
           if (!response.ok) {
             ElMessage({
-            showClose: true,
-            message: 'Beim Neuladen der Filter ist ein Fehler aufgetreten',
-            type: 'error',
-          })
+              showClose: true,
+              message: 'Beim Neuladen der Filter ist ein Fehler aufgetreten',
+              type: 'error',
+            })
           }
           ElMessage({
             showClose: true,

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>CO²-Ausstoß pro Unternehmen und Land</h1>
+    <SearchBar @search="search" @reset="reset" type="data"/>
     <el-table :data="json_data" 
               show-summary
               sum-text="Summe:">
@@ -12,8 +13,10 @@
 </template>
 
 <script> 
+import SearchBar from './SearchBar.vue';
 
 export default {
+  components: { SearchBar },
   name: "EmissionTable",
   props: ['json_data', 'filter_unternehmen', 'filter_land'],
   methods: {
@@ -22,7 +25,13 @@ export default {
     },
     filterHandler_Land(value, row){
       return row.land == value;
-    } 
+    },
+    reset(target){
+      this.$emit('reset', target);
+    },
+    search(target, text){
+      this.$emit('search', target, text);
+    }
   }
 }
 </script>

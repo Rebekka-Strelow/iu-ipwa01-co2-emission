@@ -1,22 +1,31 @@
 <template>
   <div>
     <h1>Informationen über CO²</h1>
-    <el-collapse>
+    <SearchBar @search="search" @reset="reset" type="faq"/>
       <div v-for="faq_elem in faq_data" v-bind:key="faq_elem.id">
         <FaqElement :question="faq_elem.question" :answer="faq_elem.answer" />
       </div>
-    </el-collapse>
   </div>
 </template>
 
 <script>
 import FaqElement from './FaqElement.vue'
+import SearchBar from './SearchBar.vue';
 
 export default {
   name: "InfoContent",
   props: ['faq_data'],
   components: {
-    FaqElement
+    FaqElement,
+    SearchBar
+  },
+  methods:{
+    reset(target){
+      this.$emit('reset', target);
+    },
+    search(target, text){
+      this.$emit('search', target, text);
+    }
   }
 }
 </script>
