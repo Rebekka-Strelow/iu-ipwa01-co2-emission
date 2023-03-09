@@ -8,7 +8,7 @@
       <EmissionTable v-if="this.currentPage == 'main'" class="padding_r" :json_data=backend_data
         :filter_unternehmen=filter_unternehmen :filter_land=filter_land />
 
-      <InfoContent v-if="this.currentPage == 'info'" class="padding_r" />
+      <InfoContent v-if="this.currentPage == 'info'" class="padding_r" :faq_data=faq_data />
 
       <ImpressumContent v-if="this.currentPage == 'impressum'" class="padding_r" />
 
@@ -48,6 +48,7 @@ export default {
     
     //Globale Valiablen, um die Daten aus dem Backend zu speichern
     backend_data: [],
+    faq_data: [],
     filter_unternehmen: [],
     filter_land: [],
 
@@ -102,6 +103,28 @@ export default {
         processedData.push(element);
       });
       this.backend_data = processedData;
+    },
+
+    //Hole die Daten für die FAQs
+    fetchFAQData() {
+      fetch("http://localhost:8081/faq",
+        {
+          "method": "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Origin": "http://localhost:8080",
+          }
+        }).then(response => response.json())
+        .then(data => this.parseAndLoadFAQ(data));
+    },
+    parseAndLoadFAQ(data) {
+      let index = 1;
+      let processedData = [];
+      data.forEach(element => {
+        element.id = index;
+        processedData.push(element);
+      });
+      this.faq_data = processedData;
     },
 
     //Hole die Daten für die Filter der Länder
@@ -201,6 +224,7 @@ export default {
   mounted: function () {
     //On Mount: Lade die Daten ins Frontend ein
     this.fetchBackendData();
+    this.fetchFAQData();
     this.fetchCountryFilterData();
     this.fetchCompanyFilterData();
   }

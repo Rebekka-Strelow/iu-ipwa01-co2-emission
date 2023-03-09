@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 var favicon = require('serve-favicon');
 var path = require('path');
-var controller = require('./src/controller')
+var repository = require('./src/repository')
 
 //Express-App initialisieren
 const app = express();             
@@ -28,31 +28,36 @@ app.get('/', (req, res) => {
 
 //Sende die Daten der Tabelle an sich ans Frontend
 app.get('/data', (req, res) => { 
-    return res.send(Object.values(controller.getJSONData()));
+    return res.send(Object.values(repository.getJSONData()));
 })
 
 //Sende eine Liste aller Länder an das Frontend
 app.get('/countries', (reg, res) => { 
-    return res.send(controller.getCountryFilters());
+    return res.send(repository.getCountryFilters());
 
 })
 
 //Sende eine Liste aller Unternehmen an das Fronend
 app.get('/companies', (reg, res) => { 
-    return res.send(controller.getCompanyFilters());
+    return res.send(repository.getCompanyFilters());
 
 })
 
 //Resette die Daten
 app.get('/resetData', (reg, res) => { 
-    controller.resetData();
+    repository.resetData();
     return res.sendStatus(200);
 })
 
 //Resette de Filter
 app.get('/resetFilters', (reg, res) => { 
-    controller.resetFilters();
+    repository.resetFilters();
     return res.sendStatus(200);
+})
+
+//Sende eine Liste der FAQ-Texte an das Frontend 
+app.get('/faq', (reg, res) => { 
+    return res.send(repository.getFAQData());
 })
 
 

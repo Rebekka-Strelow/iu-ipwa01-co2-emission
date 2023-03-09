@@ -1,7 +1,9 @@
 //Cache
 let cashedData = [];
+let cashedFAQData = [];
 let cachedCountryFilters = [];
 let cashedCompanyFilters = [];
+
 
 
 //Methoden, die für die API bereit gestellt werden
@@ -39,6 +41,17 @@ const getCompanyFilters = () => {
    return cashedCompanyFilters;
 }
 
+
+const getFAQData = () => {
+    if(cashedFAQData.length == 0){
+        let filePath = "../data/faq_data.json";
+        delete require.cache[require.resolve(filePath)];
+        var data = require(filePath).faq_data;
+        cashedFAQData = Array.from(data);
+    }
+    return cashedFAQData;
+}
+
 const resetFilters = () => {
     cachedCountryFilters = [];
     cashedCompanyFilters = [];
@@ -46,6 +59,7 @@ const resetFilters = () => {
 
 const resetData = () => {
     cashedData = [];
+    cashedFAQData = [];
 }
 
 //Bereitstellen der Methdoen für die API
@@ -54,5 +68,6 @@ module.exports = {
     getCountryFilters,
     getCompanyFilters,
     resetData,
-    resetFilters
+    resetFilters,
+    getFAQData
 }
