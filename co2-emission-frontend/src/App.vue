@@ -70,6 +70,11 @@ export default {
   methods: {
     //Wechsele die angezeigte Seite
     goto(target) {
+      //resette alle Filter on reload
+      this.reset("data");
+      this.reset("faq");
+
+      //geh zur neuen Seite
       this.currentPage = target;
     },
 
