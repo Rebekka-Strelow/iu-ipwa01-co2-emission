@@ -61,4 +61,9 @@ export default {
   flex-grow: 1;
 }
 
+.el-menu-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 </style>

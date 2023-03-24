@@ -14,7 +14,7 @@ app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico')));
 
 //CORS erlauben für Localhost
 var corsOptions = {
-    origin: 'http://localhost:8080',
+    origin: '*',
     optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));

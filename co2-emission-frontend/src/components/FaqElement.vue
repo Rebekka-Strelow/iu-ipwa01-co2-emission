@@ -16,6 +16,12 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
+
+.el-collapse-item__header {
+    line-height: 1 !important;
+}.el-collapse-item {
+    line-height: 1 !important;
+}
 
 </style>

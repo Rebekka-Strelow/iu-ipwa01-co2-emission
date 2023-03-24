@@ -134,12 +134,12 @@ export default {
 
     //Hole die Daten für die Tabelle
     fetchBackendData() {
-      fetch("http://localhost:8081/data",
+      fetch("http://192.168.2.100:8081/data",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://localhost:8080",
+            "Origin": "http://192.168.2.100:8080",
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadTable(data));
@@ -156,12 +156,12 @@ export default {
 
     //Hole die Daten für die FAQs
     fetchFAQData() {
-      fetch("http://localhost:8081/faq",
+      fetch("http://192.168.2.100:8081/faq",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://localhost:8080",
+            "Origin": "http://192.168.2.100:8080",
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadFAQ(data));
@@ -178,12 +178,12 @@ export default {
 
     //Hole die Daten für die Filter der Länder
     fetchCountryFilterData() {
-      fetch("http://localhost:8081/countries",
+      fetch("http://192.168.2.100:8081/countries",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://localhost:8080",
+            "Origin": "http://192.168.2.100:8080",
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadCountry(data));
@@ -200,12 +200,12 @@ export default {
 
     //Hole die Daten für die Filter der Unternehmen
     fetchCompanyFilterData() {
-      fetch("http://localhost:8081/companies",
+      fetch("http://192.168.2.100:8081/companies",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://localhost:8080",
+            "Origin": "http://192.168.2.100:8080",
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadCompany(data));
@@ -222,12 +222,12 @@ export default {
 
     //Reset-Methode für die Tabellendaten
     resetData() {
-      fetch("http://localhost:8081/resetData",
+      fetch("http://192.168.2.100:8081/resetData",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://localhost:8080",
+            "Origin": "http://192.168.2.100:8080",
           }
         }).then((response) => {
           if (!response.ok) {
@@ -247,12 +247,12 @@ export default {
 
     //Reset-Methode für die Filter
     resetFilters() {
-      fetch("http://localhost:8081/resetFilters",
+      fetch("http://192.168.2.100:8081/resetFilters",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://localhost:8080",
+            "Origin": "http://192.168.2.100:8080",
           }
         }).then((response) => {
           if (!response.ok) {
@@ -316,15 +316,32 @@ h1 {
   src: url('~@/assets/fonts/LibreFranklin-Thin.ttf');
 }
 
-.full_height {
-  width: 80vw;
+@media (max-width : 600px) {
+  .full_height {
+  width: 98vw;
   border: 1px solid #398378;
   background-color: #398378;
   border-radius: 1%;
-  height: 96vh;
+  height: 86vh;
   margin-top: 1%;
   margin-bottom: 1%;
 }
+
+}
+
+@media (min-width: 601px) {
+  .full_height {
+    width: 80vw;
+    border: 1px solid #398378;
+    background-color: #398378;
+    border-radius: 1%;
+    height: 96vh;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+}
+
+
 
 .padding_l {
   padding-left: 5%;
