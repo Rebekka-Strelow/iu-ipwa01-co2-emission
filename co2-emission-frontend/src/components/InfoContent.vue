@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Informationen über CO²</h1>
-    <SearchBar @search="search" @reset="reset" type="faq"/>
+    <SearchBar @search="search" @reset="reset" :alignment=alignment type="faq"/>
       <div v-for="faq_elem in faq_data" v-bind:key="faq_elem.id">
         <FaqElement :question="faq_elem.question" :answer="faq_elem.answer" />
       </div>
@@ -14,7 +14,7 @@ import SearchBar from './SearchBar.vue';
 
 export default {
   name: "InfoContent",
-  props: ['faq_data'],
+  props: ['faq_data', 'alignment'],
   components: {
     FaqElement,
     SearchBar

@@ -1,14 +1,14 @@
 <template>
-  <el-container class="full_height">
+  <el-container :class="'full_height ' + alignment">
     <el-header class="header">
       <HeaderImage :alignment=alignment />
       <HeaderBar @goto="goto" @reload="reload" :alignment=alignment />
     </el-header>
     <el-main class="content height_100">
       <EmissionTable v-if="this.currentPage == 'main'" class="padding_r" :json_data=backend_data
-        :filter_unternehmen=filter_unternehmen :filter_land=filter_land @search="search" @reset="reset" />
+        :filter_unternehmen=filter_unternehmen :filter_land=filter_land @search="search" @reset="reset" :alignment=alignment />
 
-      <InfoContent v-if="this.currentPage == 'info'" class="padding_r" :faq_data=faq_data @search="search" @reset="reset"/>
+      <InfoContent v-if="this.currentPage == 'info'" class="padding_r" :faq_data=faq_data @search="search" @reset="reset" :alignment=alignment />
 
       <ImpressumContent v-if="this.currentPage == 'impressum'" class="padding_r" />
 
@@ -61,7 +61,7 @@ export default {
     //Wird die Seite von Links nach Rechts oder von Rechts nach Links dargestellt?
     alignment() {
       let language = navigator.language;
-      if (this.rtl_languages.includes(language)) {
+      if (!this.rtl_languages.includes(language)) {
         return "rtl";
       }
       return "ltr";
@@ -303,7 +303,6 @@ button {
 
 h1 {
   margin-top: 2%;
-  text-align: left;
 }
 
 .el-table {
@@ -384,5 +383,13 @@ h1 {
 .height_100 {
   height: 100%;
   padding: 0;
+}
+
+.ltr {
+  text-align: left;
+}
+
+.rtl {
+  text-align: right;
 }
 </style>
