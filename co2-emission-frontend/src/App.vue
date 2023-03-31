@@ -17,6 +17,7 @@
     <el-footer class="footer">
       <PageFooter @goto="goto" />
     </el-footer>
+
   </el-container>
 </template>
 
@@ -61,7 +62,7 @@ export default {
     //Wird die Seite von Links nach Rechts oder von Rechts nach Links dargestellt?
     alignment() {
       let language = navigator.language;
-      if (!this.rtl_languages.includes(language)) {
+      if (this.rtl_languages.includes(language)) {
         return "rtl";
       }
       return "ltr";
