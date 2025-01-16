@@ -1,6 +1,6 @@
 //Imports
 const express = require('express');
-const cors = require('cors');
+//const cors = require('cors');
 var favicon = require('serve-favicon');
 var path = require('path');
 var repository = require('./src/repository')
@@ -13,11 +13,11 @@ const port = 8081;
 app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico'))); 
 
 //CORS erlauben für Localhost
-var corsOptions = {
+/*var corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200
 }
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));*/
 
 
 //############## REST SCHNITTSTELLEN ################

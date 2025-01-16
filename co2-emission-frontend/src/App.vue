@@ -59,8 +59,8 @@ export default {
     rtl_languages: ["ar", "arc", "dv", "fa", "ha", "he", "khw", "ks", "ku", "ps", "ur", "yi"],
 
     //Adressen zum Routing
-    frontend_adress:  process.env.VUE_APP_IP +":"+process.env.VUE_APP_FRONTEND_PORT,
-    backend_adress:  process.env.VUE_APP_IP +":"+process.env.VUE_APP_BACKEND_PORT,
+    //frontend_adress:  process.env.VUE_APP_FRONTEND_ADDRESS,
+    backend_adress:  process.env.VUE_APP_BACKEND_ADDRESS
   }),
   computed: {
     //Wird die Seite von Links nach Rechts oder von Rechts nach Links dargestellt?
@@ -144,7 +144,7 @@ export default {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": this.frontend_adress,
+            //"Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadTable(data));
@@ -166,7 +166,7 @@ export default {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": this.frontend_adress,
+            //"Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadFAQ(data));
@@ -188,7 +188,7 @@ export default {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": this.frontend_adress,
+            //"Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadCountry(data));
@@ -210,7 +210,7 @@ export default {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": this.frontend_adress,
+            //"Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadCompany(data));
@@ -232,7 +232,7 @@ export default {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": this.frontend_adress,
+            //"Origin": this.frontend_adress,
           }
         }).then((response) => {
           if (!response.ok) {
@@ -257,7 +257,7 @@ export default {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": this.frontend_adress,
+            //"Origin": this.frontend_adress,
           }
         }).then((response) => {
           if (!response.ok) {
