@@ -57,6 +57,10 @@ export default {
 
     //Sprachen, die das Right-to-Left-Schreibsystem verwenden
     rtl_languages: ["ar", "arc", "dv", "fa", "ha", "he", "khw", "ks", "ku", "ps", "ur", "yi"],
+
+    //Adressen zum Routing
+    frontend_adress:  process.env.VUE_APP_IP +":"+process.env.VUE_APP_FRONTEND_PORT,
+    backend_adress:  process.env.VUE_APP_IP +":"+process.env.VUE_APP_BACKEND_PORT,
   }),
   computed: {
     //Wird die Seite von Links nach Rechts oder von Rechts nach Links dargestellt?
@@ -135,12 +139,12 @@ export default {
 
     //Hole die Daten für die Tabelle
     fetchBackendData() {
-      fetch("http://192.168.2.100:8081/data",
+      fetch(this.backend_adress +"/data",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://192.168.2.100:8080",
+            "Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadTable(data));
@@ -157,12 +161,12 @@ export default {
 
     //Hole die Daten für die FAQs
     fetchFAQData() {
-      fetch("http://192.168.2.100:8081/faq",
+      fetch(this.backend_adress +"/faq",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://192.168.2.100:8080",
+            "Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadFAQ(data));
@@ -179,12 +183,12 @@ export default {
 
     //Hole die Daten für die Filter der Länder
     fetchCountryFilterData() {
-      fetch("http://192.168.2.100:8081/countries",
+      fetch(this.backend_adress +"/countries",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://192.168.2.100:8080",
+            "Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadCountry(data));
@@ -201,12 +205,12 @@ export default {
 
     //Hole die Daten für die Filter der Unternehmen
     fetchCompanyFilterData() {
-      fetch("http://192.168.2.100:8081/companies",
+      fetch(this.backend_adress +"/companies",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://192.168.2.100:8080",
+            "Origin": this.frontend_adress,
           }
         }).then(response => response.json())
         .then(data => this.parseAndLoadCompany(data));
@@ -223,12 +227,12 @@ export default {
 
     //Reset-Methode für die Tabellendaten
     resetData() {
-      fetch("http://192.168.2.100:8081/resetData",
+      fetch(this.backend_adress +"/resetData",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://192.168.2.100:8080",
+            "Origin": this.frontend_adress,
           }
         }).then((response) => {
           if (!response.ok) {
@@ -248,12 +252,12 @@ export default {
 
     //Reset-Methode für die Filter
     resetFilters() {
-      fetch("http://192.168.2.100:8081/resetFilters",
+      fetch(this.backend_adress +"/resetFilters",
         {
           "method": "GET",
           headers: {
             "Content-Type": "application/json",
-            "Origin": "http://192.168.2.100:8080",
+            "Origin": this.frontend_adress,
           }
         }).then((response) => {
           if (!response.ok) {
