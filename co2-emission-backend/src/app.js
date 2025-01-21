@@ -3,14 +3,14 @@ const express = require('express');
 //const cors = require('cors');
 var favicon = require('serve-favicon');
 var path = require('path');
-var repository = require('./src/repository')
+var repository = require('./repository/repository')
 
 //Express-App initialisieren
 const app = express();             
 const port = 8081;               
 
 //Icon einbinden
-app.use(favicon(path.join(__dirname, 'assets', 'favicon.ico'))); 
+app.use(favicon(path.join(__dirname, '../assets', 'favicon.ico'))); 
 
 //CORS erlauben für Localhost
 /*var corsOptions = {
@@ -23,7 +23,7 @@ app.use(cors(corsOptions));*/
 //############## REST SCHNITTSTELLEN ################
 //Landingpage, falls jemand das Backend direkt aufruft
 app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: __dirname});
+    res.sendFile('../index.html', {root: __dirname});
 });
 
 //Sende die Daten der Tabelle an sich ans Frontend

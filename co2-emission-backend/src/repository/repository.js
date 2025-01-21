@@ -9,7 +9,7 @@ let cashedCompanyFilters = [];
 //Methoden, die für die API bereit gestellt werden
 const getJSONData = () => {
     if(cashedData.length == 0){
-        let filePath = "../data/data.json";
+        let filePath = "../../data/data.json";
         delete require.cache[require.resolve(filePath)];
         var data = require(filePath).data;
         cashedData = Array.from(data);
@@ -44,7 +44,7 @@ const getCompanyFilters = () => {
 
 const getFAQData = () => {
     if(cashedFAQData.length == 0){
-        let filePath = "../data/faq_data.json";
+        let filePath = "../../data/faq_data.json";
         delete require.cache[require.resolve(filePath)];
         var data = require(filePath).faq_data;
         cashedFAQData = Array.from(data);
