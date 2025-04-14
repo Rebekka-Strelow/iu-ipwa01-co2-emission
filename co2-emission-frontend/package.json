@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "lint-export": "eslint -f checkstyle src > sca.xml",
     "start:dev": "vue-cli-service build --mode=development"
   },
   "dependencies": {
