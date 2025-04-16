@@ -1,21 +1,13 @@
-import pluginVue from 'eslint-plugin-vue'
-import globals from 'globals'
+import vue from 'eslint-plugin-vue'
+import js from '@eslint/js'
 
 export default [
-  // add more generic rulesets here, such as:
-  //js.configs.recommended,
-  ...pluginVue.configs['flat/recommended'],
-  // ...pluginVue.configs['flat/vue2-recommended'], // Use this if you are using Vue.js 2.x.
+  js.configs.recommended,
+  ...vue.configs['flat/recommended'],
   {
-    rules: {
-      // override/add rules settings here, such as:
-      // 'vue/no-unused-vars': 'error'
-    },
+    rules: {},
     languageOptions: {
       sourceType: 'module',
-      globals: {
-        ...globals.browser
-      }
     }
   }
 ]
