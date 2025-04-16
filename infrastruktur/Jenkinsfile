@@ -1,0 +1,73 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Rebekka-Strelow/iu-ipwa01-co2-emission.git'
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    sh 'docker-compose build'
+                }
+            }
+        }
+        
+        stage('Static Code Analysis'){
+            steps {
+                    script{
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        echo 'Generating Checkstyle XML ...'
+                        
+                            sh '''
+                                cd co2-emission-frontend
+                                npm install --save-dev eslint@8.57.1
+                                npx eslint -f checkstyle src > ../eslint.xml
+                            '''
+                          
+                        }
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            recordIssues(
+                                tools: [checkStyle(pattern: 'eslint.xml')],
+                                failOnError: false
+                            )
+                        }
+                    }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    echo "Running Tests..."
+                    sh 'docker-compose run backend npm test'
+                }
+            }
+        }
+
+        stage('Deploy Services') {
+            steps {
+                script {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+                script {
+                    sh 'docker-compose logs'
+                }
+            }
+       
+        cleanup {
+            script {
+                sh 'docker-compose down'
+            }
+        }
+    }
+}
