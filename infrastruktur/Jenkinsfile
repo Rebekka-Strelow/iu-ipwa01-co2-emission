@@ -39,11 +39,20 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Unittests') {
             steps {
                 script {
-                    echo "Running Tests..."
+                    echo "Running Unittests..."
                     sh 'docker-compose run backend npm test'
+                }
+            }
+        }
+
+        stage('Integrationstests') {
+            steps {
+                script {
+                    echo "Running Integrationstests..."
+                    sh 'docker-compose run backend npm run-script integrationtest'
                 }
             }
         }
