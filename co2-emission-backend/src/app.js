@@ -7,20 +7,10 @@ var repository = require('./repository/repository')
 
 //Express-App initialisieren
 const app = express();             
-const port = 8081;               
 
 //Icon einbinden
 app.use(favicon(path.join(__dirname, '../assets', 'favicon.ico'))); 
 
-//CORS erlauben für Localhost
-/*var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));*/
-
-
-//############## REST SCHNITTSTELLEN ################
 //Landingpage, falls jemand das Backend direkt aufruft
 app.get('/', (req, res) => {
     res.sendFile('../index.html', {root: __dirname});
@@ -60,10 +50,4 @@ app.get('/faq', (reg, res) => {
     return res.send(repository.getFAQData());
 })
 
-
-// ############### REST SCHNITTSTELLLEN ENDE ##############
-
-//Ausloggen von Serverstart erfolgreich
-app.listen(port, () => {
-    console.log(`Now listening on port ${port}`); 
-});
+module.exports = app;

@@ -2,9 +2,10 @@
   "name": "co2-emission-backend",
   "version": "1.0.0",
   "description": "backend-application for the co2-emission project",
-  "main": "src/app.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --roots src/tests",
+    "integrationtest": "jest --roots src/integrationstests"  
   },
   "author": "Rebekka Strelow",
   "license": "ISC",
@@ -16,6 +17,6 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "supertest": "^7.0.0"
+    "supertest": "^7.1.0"
   }
 }
