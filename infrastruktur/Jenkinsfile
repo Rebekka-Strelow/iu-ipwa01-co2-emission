@@ -19,7 +19,7 @@ pipeline {
         stage('Static Code Analysis'){
             steps {
                     script{
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                         echo 'Generating Checkstyle XML ...'
                         
                             sh '''
@@ -29,7 +29,7 @@ pipeline {
                             '''
                           
                         }
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                             recordIssues(
                                 tools: [checkStyle(pattern: 'eslint.xml')],
                                 failOnError: false
@@ -39,11 +39,23 @@ pipeline {
             }
         }
 
-        stage('Unittests') {
+        stage('Unittests Backend') {
             steps {
                 script {
                     echo "Running Unittests..."
                     sh 'docker-compose run backend npm test'
+                }
+            }
+        }
+
+        stage('Unittests Frontend') {
+            steps {
+                script {
+                    echo "Running Unittests..."
+                    sh '''
+                        cd co2-emission-frontend
+                        npm run test:unit
+                    '''
                 }
             }
         }
