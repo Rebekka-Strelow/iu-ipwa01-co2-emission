@@ -68,6 +68,24 @@ pipeline {
                 }
             }
         }
+        
+        stage('Playwright-Tests') {
+            steps {
+                script {
+                    echo "Running Playwright Tests..."
+                    sh 'docker-compose up -d'
+                    sh '''
+                        cd co2-emission-frontend
+                        npm ci
+                        npx playwright install --with-deps
+                        npx playwright test
+                    '''
+                    sh 'docker-compose down'
+                }
+            }
+        }
+        
+        
 
         stage('Deploy Services') {
             steps {
