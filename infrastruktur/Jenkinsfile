@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    environment {
+        PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:8080'
+    }
     stages {
         stage('Checkout Code') {
             steps {
