@@ -4,20 +4,14 @@ pipeline {
         PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:8080'
     }
     stages {
-        stage('Checkout Code') {
+        stage('Build'){
             steps {
                 git branch: 'main', url: 'https://github.com/Rebekka-Strelow/iu-ipwa01-co2-emission.git'
-            }
-        }
-
-        stage('Build Docker Images') {
-            steps {
                 script {
                     sh 'docker-compose build'
                 }
             }
         }
-        
         stage('Static Code Analysis'){
             steps {
                     script{
@@ -41,57 +35,90 @@ pipeline {
             }
         }
 
-        stage('Unittests Backend') {
+        stage('Unittests'){
+            parallel  {
+                stage('Backend') {
+                    steps {
+                        script {
+                            echo "Running Unittests for Backend ..."
+                            sh 'docker-compose run backend npm test'
+                        }
+                    }
+                }
+
+                stage('Frontend') {
+                    steps {
+                        script {
+                            echo "Running Unittests for Frontend ..."
+                            sh '''
+                            cd co2-emission-frontend
+                            npm run test:unit
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+       
+       stage('Start Webapp'){
             steps {
                 script {
-                    echo "Running Unittests..."
-                    sh 'docker-compose run backend npm test'
+                    sh 'docker-compose up -d'
                 }
             }
         }
 
-        stage('Unittests Frontend') {
-            steps {
-                script {
-                    echo "Running Unittests..."
-                    sh '''
-                        cd co2-emission-frontend
-                        npm run test:unit
-                    '''
+    
+        stage('Integrationstests'){
+            parallel {
+                stage('Backend'){
+                    steps {
+                        script {
+                            echo "Running Integrationstests..."
+                            sh 'docker-compose run backend npm run-script integrationtest'
+                        }
+                    }
+                }
+                
+                stage('Frontend'){
+                    steps {
+                        script {
+                            echo "Running Integrationstests..."
+                            sh '''
+                                cd co2-emission-frontend
+                                npm run test:integration
+                            '''
+                        }
+                    }
                 }
             }
         }
-
-        stage('Integrationstests') {
-            steps {
-                script {
-                    echo "Running Integrationstests..."
-                    sh 'docker-compose run backend npm run-script integrationtest'
-                }
-            }
-        }
-        
+     
         stage('Playwright-Tests') {
             steps {
                 script {
                     echo "Running Playwright Tests..."
-                    sh 'docker-compose up -d'
                     sh '''
                         cd co2-emission-frontend
                         npm ci
                         npx playwright install --with-deps
                         npx playwright test
                     '''
+                }
+            }
+        }
+        stage('Stop Webapp'){
+            steps {
+                script {
                     sh 'docker-compose down'
                 }
             }
         }
         
-        
-
         stage('Deploy Services') {
             steps {
                 script {
+                    echo "Deploying ..."
                     sh 'docker-compose up -d'
                 }
             }
