@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  backend:
+    image: co2-emission-backend:latest    # <- fertiges Image
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app_network
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+
+  frontend:
+    image: co2-emission-frontend:latest  # <- fertiges Image
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 5s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+
+networks:
+  app_network:
