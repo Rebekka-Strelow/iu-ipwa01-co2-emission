@@ -5,7 +5,7 @@ services:
     container_name: frontend
     build: ./co2-emission-frontend
     ports:
-      - "8080:80"
+      - "9080:80"
     depends_on:
       - backend
     networks:
@@ -15,7 +15,7 @@ services:
     container_name: backend
     build: ./co2-emission-backend
     ports:
-      - "8081:8081"
+      - "9081:8081"
     environment:
       - NODE_ENV=production
     networks:
