@@ -170,10 +170,10 @@ pipeline {
 
   post {
     success {
-      echo "✅ Deployment von Tag ${params.IMAGE_TAG} erfolgreich!"
+      echo "Deployment von Tag ${params.IMAGE_TAG} erfolgreich!"
     }
     failure {
-      echo "❌ Deployment gescheitert – prüfe die Logs von ${STACK_NAME} im Swarm."
+      echo "Deployment gescheitert – prüfe die Logs von ${STACK_NAME} im Swarm."
     }
     cleanup {
         script {
