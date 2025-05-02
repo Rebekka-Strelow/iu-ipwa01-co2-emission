@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:8080'
+        COMPOSE_PROJECT_NAME = "ci-${env.BUILD_NUMBER}"
     }
     stages {
         stage('Build'){
@@ -60,7 +61,7 @@ pipeline {
             }
         }
        
-       stage('Start Webapp'){
+       stage('Deploy to TestServer'){
             steps {
                 script {
                     sh 'docker-compose up -d'
@@ -107,24 +108,7 @@ pipeline {
                 }
             }
         }
-        stage('Stop Webapp'){
-            steps {
-                script {
-                    sh 'docker-compose down'
-                }
-            }
-        }
-        
-        stage('Deploy Services') {
-            steps {
-                script {
-                    echo "Deploying ..."
-                    sh 'docker-compose up -d'
-                }
-            }
-        }
     }
-
     post {
         always {
                 script {
