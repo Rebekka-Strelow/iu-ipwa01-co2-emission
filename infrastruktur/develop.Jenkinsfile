@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:8080'
+        PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:9080'
         COMPOSE_PROJECT_NAME = "ci-${env.BUILD_NUMBER}"
     }
     stages {
