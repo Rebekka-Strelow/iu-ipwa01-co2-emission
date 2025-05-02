@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                git branch: 'main', url: 'https://github.com/Rebekka-Strelow/iu-ipwa01-co2-emission.git'
+                git branch: 'develop', url: 'https://github.com/Rebekka-Strelow/iu-ipwa01-co2-emission.git'
                 script {
                     sh 'docker-compose build'
                 }
